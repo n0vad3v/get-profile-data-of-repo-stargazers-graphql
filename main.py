@@ -6,6 +6,9 @@ import csv
 import datetime
 import requests
 
+owner = "996icu"
+repo = "996.icu"
+
 headers = {"Authorization": "token <FILL YOUR PERSONAL ACCESS TOKENS HERE>"}
 
 fields = ["username","name","blog", "company", "bio","avatar_url","hireable" , "num_followers", "num_following","created_at","star_time"]
@@ -20,8 +23,8 @@ def run_query(query):
 
 query = """
 query {{
-  repository(owner:"996icu", name:"996.ICU") {{
-    stargazers(first:100,after:{0}) {{
+  repository(owner:"{0}", name:"{1}") {{
+    stargazers(first:100,after:{2}) {{
       pageInfo {{
         endCursor
         hasNextPage
@@ -60,7 +63,7 @@ with open('stargazers.csv', 'w') as stars:
     stars_writer = csv.writer(stars)
     stars_writer.writerow(fields)
     while hasNextPage:
-        this_query = query.format(endCursor)
+        this_query = query.format(owner,repo,endCursor)
         result = run_query(this_query) # Execute the query
         #print(this_query)
         #print(result)
