@@ -8,6 +8,8 @@ I wrote this on my personal analysis project, the "StarTime-StarCount" chart in 
 
 ![](./chart.png)
 
+This program will store stargazers' "username","name","blog", "company", "bio","avatar_url","hireable" , "num_followers", "num_following","created_at","star_time" in csv format.
+
 # Usage
 
 1. Get an access token from your GitHub account.
