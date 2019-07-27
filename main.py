@@ -5,11 +5,17 @@ import graphene
 import csv
 import datetime
 import requests
+import argparse
 
-owner = "996icu"
-repo = "996.icu"
+parser = argparse.ArgumentParser()
+parser.add_argument('-t','--token',required=True,help="The GitHub Token.")
+parser.add_argument('-r','--repo',required=True,help="The GitHub Repo,in the form like 'user/repo'.")
+args = parser.parse_args()
 
-headers = {"Authorization": "token <FILL YOUR PERSONAL ACCESS TOKENS HERE>"}
+owner = args.repo.split('/')[0]
+repo = args.repo.split('/')[1]
+
+headers = {"Authorization": "token "+args.token}
 
 fields = ["username","name","blog", "company", "bio","avatar_url","hireable" , "num_followers", "num_following","created_at","star_time"]
 

@@ -13,10 +13,14 @@ This program will store stargazers' "username","name","blog", "company", "bio","
 # Usage
 
 1. Get an access token from your GitHub account.
-2. Write your access token to line 9 of `main.py`.
-3. Set the owner and repo name in line 9,10 of `main.py`.
-4. Set timezone in line 103 and 107, default is UTC-5.
-5. Run the script!
+
+2. Set timezone in line 103 and 107, default is UTC-5.
+
+3. Run the script with:
+
+   ```bash
+   python main.py -r 'username/reponame' -t <GitHub Token>
+   ```
 
 # Author
 
