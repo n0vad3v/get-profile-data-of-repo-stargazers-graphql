@@ -30,7 +30,7 @@ def run_query(query):
 query = """
 query {{
   repository(owner:"{0}", name:"{1}") {{
-    stargazers(first:100,after:{2}) {{
+    stargazers(first:100 {2}) {{
       pageInfo {{
         endCursor
         hasNextPage
@@ -75,7 +75,7 @@ with open('stargazers.csv', 'w') as stars:
         #print(result)
         hasNextPage = result['data']['repository']['stargazers']['pageInfo']['hasNextPage']
         endCursor = result['data']['repository']['stargazers']['pageInfo']['endCursor']
-        endCursor = '"' + endCursor + '"'
+        endCursor = ', after: "' + endCursor + '"'
         data = result['data']['repository']['stargazers']['edges']
 
         for item in data:
@@ -95,11 +95,11 @@ with open('stargazers.csv', 'w') as stars:
             created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
 
             star_time = datetime.datetime.strptime(item['starredAt'],'%Y-%m-%dT%H:%M:%SZ')
-            star_time = star_time + datetime.timedelta(hours=-5) # CST
+            star_time = star_time + datetime.timedelta(hours=-5) # EST
             star_time = star_time.strftime('%Y-%m-%d %H:%M:%S')
             star_list.append((username,star_time))
             stars_writer.writerow([username,name,blog,company,bio,avatar_url,hireable,num_followers,num_following,created_at,star_time])
 
         count = count + 100
-        print(count + "users processed.")
+        print(str(count) + "users processed.")
 
